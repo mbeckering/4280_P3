@@ -1,0 +1,1 @@
+g++ main.cpp scanner.cpp parser.cpp testTree.cpp -o frontEnd

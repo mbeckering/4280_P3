@@ -1,0 +1,10 @@
+called: C:\MinGW\bin\g++.exe
+	D:\Documents\NetBeansProjects\4280_P3
+	C:\MinGW\bin\g++.exe
+	main.cpp
+	scanner.cpp
+	parser.cpp
+	testTree.cpp
+	-o
+	frontEnd
+
