@@ -12,6 +12,8 @@
 
 using namespace std;
 
+// error accepts the token for detailed reporting, and a string indicating
+// the type of error: "multiple" or "undeclared"
 void error(token, string);
 
 // symbol table container, stores full tokens for detailed error reporting
@@ -26,24 +28,29 @@ struct ST{
         // traverse the token array
         for(int i = 0; i <= 99; i++) {
             // if this token is uninitialized, insert here
-            if (tokens[i].lineNumber == 0) {
-                tokens[i].ID = t.ID;
-                tokens[i].lineNumber = t.lineNumber;
-                tokens[i].tokenInstance = t.tokenInstance;
+            if (this->tokens[i].lineNumber == 0) {
+                this->tokens[i].ID = t.ID;
+                this->tokens[i].lineNumber = t.lineNumber;
+                this->tokens[i].tokenInstance = t.tokenInstance;
                 break;
+            }
+            if (i == 99 && this->tokens[i].lineNumber != 0) {
+                // if this point is reached, the program exceeds 100 tokens
+                cout << "Error: Stack overflow (exceeded maximum token count)\n";
+                exit (EXIT_FAILURE);
             }
         }
     }
     bool verify(token t){
         for(int i = 0; i <= 99; i++) {
             // if token instance matches a stored instance, return true
-            if (t.tokenInstance == tokens[i].tokenInstance) {
+            if (t.tokenInstance == this->tokens[i].tokenInstance) {
                 cout << "verified " + t.tokenInstance + " exists in stack\n";
                 return true;
             }
             // if an uninitialized token is reached, return false to
             // avoid traversing the entire array pointlessly
-            else if (tokens[i].lineNumber == 0) {
+            else if (this->tokens[i].lineNumber == 0) {
                 return false;
             }
         }
