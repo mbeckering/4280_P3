@@ -70,11 +70,12 @@ int main(int argc, char** argv) {
     node* root = parser(in);
     in.close();
     
-    statSem(root, 0);
+    // call the print function (used for testing)
+    // printPreorder(root, 0);
     
-    // call the print function with root pointer and initial depth of 0
-    //printPreorder(root, 0);
-
+    statSem(root, 0);
+    cout << "main: Static Semantics OK\n";
+    
     return 0;
 }
 

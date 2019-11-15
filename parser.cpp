@@ -16,6 +16,9 @@
 
 using namespace std;
 
+// global token for use in recursive descent parse functions
+token t;
+
 // global string array associated to the token.ID enumeration (for printing)
 string tokenNames[] = {
         "ID_tk",      // 0
@@ -55,9 +58,6 @@ string tokenNames[] = {
         "RIGHTBRACKET_tk",// 34
         "EOF_tk"      // 35
     };
-
-// global token for use in recursive descent parse functions
-token t;
 
 // getNode function defined here to avoid what I think is a
 // recursive  multiple inclusion issue with node.h
@@ -461,6 +461,7 @@ node* assign(ifstream& inFile) {
                 p->t2 = t;
                 t = scanner(inFile);
                 p->c0 = expr(inFile);
+                return p;
             }
             else {
                 error(inFile, t, tokenNames[LESSTHAN_tk]);
