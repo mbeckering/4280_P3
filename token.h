@@ -48,7 +48,8 @@ enum tokenID {
         SEMICOLON_tk,   // 32
         LEFTBRACKET_tk, // 33
         RIGHTBRACKET_tk,// 34
-        EOF_tk      // 35
+        EOF_tk,     // 35
+        NULL_tk     // 36
     };
 
 // data structure for each token
