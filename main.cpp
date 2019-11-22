@@ -18,6 +18,8 @@
 #include "testTree.h"
 #include "node.h"
 #include "statSem.h"
+#include "codeGen.h"
+#include "st.h"
 
 using namespace std;
 
@@ -72,12 +74,14 @@ int main(int argc, char** argv) {
     // call the print function (used for testing)
     // printPreorder(root, 0);
     
-    const char *targetFilenameChar = targetFilenameStr.c_str();
-    ofstream out;
-    out.open(targetFilenameChar);
-    statSem(root, 0, out);
+    statSem(root, 0);
     cout << "static semantics OK\n";
-    out.close();
+    
+    const char *targetFilenameChar = targetFilenameStr.c_str();
+    FILE * out;
+    out = fopen(targetFilenameChar, "w");
+    codeGen(root, 0, out);
+    fclose(out);
     cout << "generated target " << targetFilenameStr << "\n";
     
     return 0;

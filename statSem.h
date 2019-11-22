@@ -13,6 +13,6 @@
 #include <cstdlib>
 #include "node.h"
 
-void statSem(node*, int, std::ofstream&);
+void statSem(node*, int);
 
 #endif /* STATSEM_H */
