@@ -64,7 +64,7 @@ string tokenNames[] = {
 node* getNode(std::string label) {
     node *temp = new node();
     temp->label = label;
-    temp->c0 = temp->c2 = temp->c2 = temp->c3 = NULL;
+    temp->c0 = temp->c1 = temp->c2 = temp->c3 = NULL;
     return temp;
 }
 
@@ -200,17 +200,17 @@ node* A(ifstream& inFile) {
 
 node* N(ifstream& inFile) {
     node* p = getNode("N");
-    p->c1 = M(inFile);
+    p->c0 = M(inFile);
     if (t.ID == DIVIDE_tk) {
         p->t0 = t;
         t = scanner(inFile);
-        p->c2 = N(inFile);
+        p->c1 = N(inFile);
         return p;
     }
     else if (t.ID == MULTIPLY_tk) {
         p->t0 = t;
         t = scanner(inFile);
-        p->c2 = N(inFile);
+        p->c1 = N(inFile);
         return p;
     }
     else {
@@ -288,6 +288,7 @@ node* mStat(ifstream& inFile) {
         node* p = getNode("mStat");
         p->c0 = stat(inFile);
         if (t.ID == SEMICOLON_tk) {
+            p->t0 = t;
             t = scanner(inFile);
             p->c1 = mStat(inFile);
             return p;
