@@ -1,7 +1,7 @@
 /* 
  * File:   token.h
  * Author: Michael Beckering
- * Project 1
+ * Project 4
  * CS-4280-001-FS2019
  *
  * Created on October 14, 2019, 12:43 PM

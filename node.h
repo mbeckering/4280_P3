@@ -1,7 +1,7 @@
 /* 
  * File:   node.h
  * Author: Michael Beckering
- * Project 0
+ * Project 4
  * CS-4280-001-FS2019
  *
  * Created on November 10, 2019, 2:06 PM

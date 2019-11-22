@@ -1,7 +1,7 @@
 /* 
  * File:   parser.cpp
  * Author: Michael Beckering
- * Project 2
+ * Project 4
  * CS-4280-001-FS2019
  *
  * Created on November 1, 2019, 9:55 AM
@@ -107,7 +107,7 @@ node* program(ifstream& inFile) {
     p->c0 = vars(inFile);
     p->c1 = block(inFile);
     if (t.ID == EOF_tk) {
-        cout << "parser: parse OK\n";
+        cout << "parse OK\n";
     }
     else {
         error(inFile, t, tokenNames[EOF_tk]);

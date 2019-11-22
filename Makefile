@@ -1,7 +1,7 @@
 all: main
 
 main: main.cpp
-	g++ main.cpp scanner.cpp parser.cpp testTree.cpp statSem.cpp -o statSem
+	g++ main.cpp scanner.cpp parser.cpp testTree.cpp statSem.cpp -o compile
 	
 clean:
-	rm statSem input.fs19
+	rm compile kb.fs19

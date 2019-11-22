@@ -1,7 +1,7 @@
 /*
  * File:   statSem.h
  * Author: Michael Beckering
- * Project 3
+ * Project 4
  * CS-4280-001-FS2019
  *
  * Created on November 14, 2019, 9:17 AM
@@ -13,6 +13,6 @@
 #include <cstdlib>
 #include "node.h"
 
-void statSem(node*, int);
+void statSem(node*, int, std::ofstream&);
 
 #endif /* STATSEM_H */

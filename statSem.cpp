@@ -1,7 +1,7 @@
 /* 
  * File:   statSem.cpp
  * Author: Michael Beckering
- * Project 3
+ * Project 4
  * CS-4280-001-FS2019
  * 
  * Created on November 14, 2019, 9:17 AM
@@ -87,7 +87,7 @@ ST STV;
 // global variables
 bool beforeFirstBlock = true;
 
-void statSem(node* root, int depth) {
+void statSem(node* root, int depth, ofstream& out) {
     if (root == NULL) {
         return;
     }
@@ -182,10 +182,10 @@ void statSem(node* root, int depth) {
         }
     }
     
-    statSem(root->c0, depth+1);
-    statSem(root->c1, depth+1);
-    statSem(root->c2, depth+1);
-    statSem(root->c3, depth+1);
+    statSem(root->c0, depth+1, out);
+    statSem(root->c1, depth+1, out);
+    statSem(root->c2, depth+1, out);
+    statSem(root->c3, depth+1, out);
     
     // if exiting a block
     if (root->label == "block") {
