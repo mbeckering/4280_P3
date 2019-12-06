@@ -13,6 +13,6 @@
 #include "node.h"
 
 void codeGen(node*, FILE*);
-void storeageAlloc(FILE*);
+void storageAlloc(FILE*);
 
 #endif /* CODEGEN_H */

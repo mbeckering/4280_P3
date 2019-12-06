@@ -15,25 +15,34 @@
 
 using namespace std;
 
+char *temp0;
+
 // variables for generating unique temp var names and labels
 static int labelNum = 0;
 static int varNum = 0;
 typedef enum {VAR, LABEL} nameType;
 static char Name[100];
 
-static char *newName(nameType nametype) {
+// storage for the var and label names, used for memory allocation
+static char allocVars[100];
+static char allocLabels[100];
+
+static string newName(nameType nametype) {
     if (nametype == VAR) {
         sprintf(Name, "tempVar%d", varNum++);
     }
     else if (nametype == LABEL) {
-        sprintf(Name, "label%d", labelNum++);
+        sprintf(Name, "tempLabel%d", labelNum++);
     }
-    return(Name);
+    string returnval = string(Name);
+    return returnval;
 }
 
 void storageAlloc(FILE* out) {
     cout << "called storageAlloc()\n";
-    //TODO print temp vars and vars from STV
+    //TODO print temp vars from allocVars
+    // and labels from allocLabels
+    // and vars from STV
     
 }
 
@@ -46,8 +55,8 @@ void codeGen(node* root, FILE* out){
         codeGen(root->c0, out);
         codeGen(root->c1, out);
         fprintf(out, "STOP\n");
+        storageAlloc(out);
         return;
-        // TODO MEMORY ALLOCATION
     }
     else if (root->label == "block") {
         codeGen(root->c0, out);
@@ -55,8 +64,6 @@ void codeGen(node* root, FILE* out){
         return;
     }
     else if (root->label == "vars") {
-        // if t0 of this vars node is initialized, children are 
-        // t0 ID_tk and t1 NUM_tk
         if (root->t0.lineNumber != 0) {
             fprintf(out, "LOAD %s\n", root->t1.tokenInstance.c_str());
             fprintf(out, "STORE %s\n", root->t0.tokenInstance.c_str());
@@ -66,7 +73,6 @@ void codeGen(node* root, FILE* out){
         // else this is an empty vars node, continue down to call children
     }
     else if (root->label == "expr") {
-        cout << "expr\n";
         // if t0 is uninitialized, this node has only <A> and generates no code
         if (root->t0.lineNumber == 0) {
             codeGen(root->c0, out);
@@ -75,15 +81,14 @@ void codeGen(node* root, FILE* out){
         // else produce code for c0 <A> + c1 <expr>
         else {
             codeGen(root->c1, out);
-            char *temp = newName(VAR);
-            fprintf(out, "STORE %s\n", temp);
+            string temp = newName(VAR);
+            fprintf(out, "STORE %s\n", temp.c_str());
             codeGen(root->c0, out);
-            fprintf(out, "ADD %s\n", temp);
+            fprintf(out, "ADD %s\n", temp.c_str());
             return;
         }
     }
     else if (root->label == "A") {
-        cout << "A\n";
         // if t0 is uninitialized, this node has only 
         // the <N> child and generates no code
         if (root->t0.lineNumber == 0) {
@@ -93,15 +98,14 @@ void codeGen(node* root, FILE* out){
         // else produce code for c0 <N> - c1 <A>
         else {
             codeGen(root->c1, out);
-            char *temp = newName(VAR);
-            fprintf(out, "STORE %s\n", temp);
+            string temp = newName(VAR);
+            fprintf(out, "STORE %s\n", temp.c_str());
             codeGen(root->c0, out);
-            fprintf(out, "SUB %s\n", temp);
+            fprintf(out, "SUB %s\n", temp.c_str());
             return;
         }
     }
     else if (root->label == "N") {
-        cout << "N\n";
         // if t0 is uninitialized, this node has only 
         // the <M> child and generates no code
         if (root->t0.lineNumber == 0) {
@@ -110,19 +114,18 @@ void codeGen(node* root, FILE* out){
         }
         // else it's division or multiplication
         else {
-            char *temp = newName(VAR);
+            string temp = newName(VAR);
             codeGen(root->c1, out);
-            fprintf(out, "STORE %s\n", temp);
+            fprintf(out, "STORE %s\n", temp.c_str());
             codeGen(root->c0, out);
             if (root->t0.ID == DIVIDE_tk)
-                fprintf(out, "DIV %s\n", temp);
+                fprintf(out, "DIV %s\n", temp.c_str());
             else
-                fprintf(out, "MULT %s\n", temp);
+                fprintf(out, "MULT %s\n", temp.c_str());
             return;
         }
     }
     else if (root->label == "M") {
-        cout << "M\n";
         // if t0 is uninitialized, this node has only 
         // the <R> child and generates no code
         if (root->t0.lineNumber == 0) {
@@ -137,7 +140,6 @@ void codeGen(node* root, FILE* out){
         }
     }
     else if (root->label == "R") {
-        cout << "R\n";
         // if the first token is a bracket, we're looking at [<expr>] production
         if (root->t0.ID == LEFTBRACKET_tk) {
             codeGen(root->c0, out);
@@ -151,12 +153,10 @@ void codeGen(node* root, FILE* out){
         }
     }
     else if (root->label == "stats") {
-        cout << "stats\n";
         codeGen(root->c0, out);
         codeGen(root->c1, out);
     }
     else if (root->label == "mStat") {
-        cout << "mStat\n";
         // if the first token is initialized, <stat> ; <mStat> production
         if (root->t0.lineNumber != 0) {
             codeGen(root->c0, out);
@@ -166,35 +166,32 @@ void codeGen(node* root, FILE* out){
         return; // otherwise empty production of <mStat>
     }
     else if (root->label == "stat") {
-        cout << "stat\n";
         codeGen(root->c0, out);
         return;
     }
     else if (root->label == "in") {
-        cout << "in\n";
         fprintf(out, "READ %s\n", root->t0.tokenInstance.c_str());
         return;
     }
     else if (root->label == "out") {
-        cout << "out\n";
-        char *temp = newName(VAR);
+        string temp = newName(VAR);
         codeGen(root->c0, out);
-        fprintf(out, "STORE %s\n", temp);
-        fprintf(out, "WRITE %s\n", temp);
+        fprintf(out, "STORE %s\n", temp.c_str());
+        fprintf(out, "WRITE %s\n", temp.c_str());
         return;
     }
     else if (root->label == "if") {
-        char *temp1 = newName(VAR);
+        string temp = newName(VAR);
         codeGen(root->c2, out);
-        fprintf(out, "STORE %s\n", temp1);
+        fprintf(out, "STORE %s\n", temp.c_str());
         codeGen(root->c0, out);
-        fprintf(out, "SUB %s\n", temp1);
+        fprintf(out, "SUB %s\n", temp.c_str());
         // here we've subtracted arg2 from arg1, result is in ACC
-        char *label = newName(LABEL);
+        string templabel = newName(LABEL);
         // determine <RO> operator: call <RO> child and let it print BR????
         codeGen(root->c1, out);
         // finish <RO>'s ASM statement with the label
-        fprintf(out, " %s\n", label);
+        fprintf(out, " %s\n", templabel.c_str());
         // call the child holding the <stat> within the conditional
         codeGen(root->c3, out);
         return;

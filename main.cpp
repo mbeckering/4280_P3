@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
     in.close();
     
     // call the print function (used for testing)
-    printPreorder(root, 0);
+    //printPreorder(root, 0);
     
     statSem(root, 0);
     cout << "static semantics OK\n";
@@ -81,7 +81,6 @@ int main(int argc, char** argv) {
     FILE * out;
     out = fopen(targetFilenameChar, "w");
     codeGen(root, out);
-    storageAlloc(out);
     fclose(out);
     cout << "generated target " << targetFilenameStr << "\n";
     

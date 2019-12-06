@@ -10,17 +10,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/node.h</file>
             <file>file:/D:/Documents/NetBeansProjects/4280_P3/statSem.h</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/parser.h</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/token.h</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/Makefile</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/testTree.cpp</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/README.txt</file>
+            <file>file:/D:/Documents/NetBeansProjects/4280_P3/st.h</file>
             <file>file:/D:/Documents/NetBeansProjects/4280_P3/parser.cpp</file>
             <file>file:/D:/Documents/NetBeansProjects/4280_P3/main.cpp</file>
+            <file>file:/D:/Documents/NetBeansProjects/4280_P3/codeGen.h</file>
+            <file>file:/D:/Documents/NetBeansProjects/4280_P3/codeGen.cpp</file>
             <file>file:/D:/Documents/NetBeansProjects/4280_P3/statSem.cpp</file>
-            <file>file:/D:/Documents/NetBeansProjects/4280_P3/testTree.h</file>
         </group>
     </open-files>
 </project-private>
