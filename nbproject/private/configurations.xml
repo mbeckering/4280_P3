@@ -18,6 +18,7 @@
       <in>token.h</in>
     </df>
     <itemPath>README.txt</itemPath>
+    <itemPath>cahuna2.fs19</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

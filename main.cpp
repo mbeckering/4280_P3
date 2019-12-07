@@ -32,12 +32,12 @@ int main(int argc, char** argv) {
     if (argc == 1) {
         string line;
         ofstream out("kb.fs19");
-        cout << "Reading input from keyboard stream (CTRL+D when finished)\n";
+        //cout << "Reading input from keyboard stream (CTRL+D when finished)\n";
         while (getline(cin, line)) {
             out << line << "\n";
         }
         out.close();
-        cout << "generated input file kb.fs19\n";
+        //cout << "generated input file kb.fs19\n";
         inputFilenameStr = "kb.fs19";
         outputFilenameStr = "kb"; // base name for output files
         targetFilenameStr = "kb.asm";
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     //printPreorder(root, 0);
     
     statSem(root, 0);
-    cout << "static semantics OK\n";
+    //cout << "static semantics OK\n";
     
     const char *targetFilenameChar = targetFilenameStr.c_str();
     FILE * out;

@@ -20,6 +20,7 @@
       <itemPath>nbproject/private/launcher.properties</itemPath>
     </logicalFolder>
     <itemPath>README.txt</itemPath>
+    <itemPath>cahuna2.fs19</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -48,6 +49,8 @@
         </preBuild>
       </makefileType>
       <item path="README.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cahuna2.fs19" ex="false" tool="3" flavor2="0">
       </item>
       <item path="codeGen.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -107,7 +107,7 @@ node* program(ifstream& inFile) {
     p->c0 = vars(inFile);
     p->c1 = block(inFile);
     if (t.ID == EOF_tk) {
-        cout << "parse OK\n";
+        //cout << "parse OK\n";
     }
     else {
         error(inFile, t, tokenNames[EOF_tk]);

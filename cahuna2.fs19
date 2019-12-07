@@ -1,0 +1,30 @@
+var lob1 : 1
+var lob2 : 2
+var lob3 : 15
+start
+   start
+    var lob1 : 1
+    var lob2 : 2
+    in lob1 ;
+    in lob2 ;
+    cond ( ( lob1 > > lob2 ) )
+    start
+       lob1 < < lob1 + lob3 ;
+       iterate ( ( lob2 < lob1 ) )
+       start
+          out lob2 ;
+          lob2 < < lob2 + 1 ;
+       stop ;
+    stop ;
+    cond ( ( lob1 < lob2 ) )
+    start
+      out lob2 ;
+      lob2 < < lob1 + [ 3 * lob2 ] ;
+    stop ;
+    out 100 - [ [ 10 * 10 / 5 / 5 ] + - - 50 ] ;
+    out lob1 ;
+    out lob2 ;
+   stop ;
+   out lob1 ;
+   out lob2 ;
+stop

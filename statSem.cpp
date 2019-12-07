@@ -129,7 +129,6 @@ void statSem(node* root, int depth) {
     
     // if exiting a block
     if (root->label == "block") {
-        //cout << "EXIT block " << blockNum << ", varCount=" << varCount[blockNum] << "\n";
         //STV.printStack();
         // pop the variables from this block
         for (int i=0; i<varCount[blockNum]; i++) {
